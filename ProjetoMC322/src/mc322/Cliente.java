@@ -48,8 +48,8 @@ public class Cliente {
     }
     public boolean validarCPF(){
         String cpflimpo;
-        cpflimpo = cpf.replaceAll("[^0123456789]","");
-        if (cpflimpo.length() != 11)
+        cpflimpo = cpf.replaceAll("[^0123456789]","");//Remove caracteres especiais do CPF
+        if (cpflimpo.length() != 11) //Confere numero de caracteres
         {
             return false;
         }
@@ -57,27 +57,27 @@ public class Cliente {
         || cpflimpo.equals("22222222222") || cpflimpo.equals("33333333333") 
         || cpflimpo.equals("44444444444") || cpflimpo.equals("55555555555")
         || cpflimpo.equals("66666666666") || cpflimpo.equals("77777777777")
-        || cpflimpo.equals("88888888888") || cpflimpo.equals("99999999999"))
+        || cpflimpo.equals("88888888888") || cpflimpo.equals("99999999999")) //Confere se os caracteres são iguais
         {
             return false;
         }
-        int [] digitos = {0,0,0,0,0,0,0,0,0,0,0};
-        for(int i = 0; i < 11; i++)
+        int [] digitos = new int[11];
+        for(int i = 0; i < 11; i++) //Transforma o CPF em um vetor de int
         {
             digitos[i] = Character.getNumericValue(cpflimpo.charAt(i));
         }
-        int [] temp = {0,0,0,0,0,0,0,0,0,0};
-        for(int i = 0; i < 9; i++)
+        int [] temp = new int[10];
+        for(int i = 0; i < 9; i++) //Multiplica cada digito pelos fatores 
         {
             temp[i] = digitos[i]*(10-i);
         }
         int primeiroDividendo = 0;
         int primeiroDigito = -1; //dummy do primeiro digito
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 9; i++) //Produz o dividendo do primeiro digito verificador
         {
             primeiroDividendo = primeiroDividendo + temp[i];
         }
-        if(primeiroDividendo % 11 < 2)
+        if(primeiroDividendo % 11 < 2) //Define o primeiro digito verificador
         {
             primeiroDigito = 0;
         }
@@ -85,18 +85,18 @@ public class Cliente {
         {
             primeiroDigito = 11 - (primeiroDividendo % 11);
         }
-        for(int i = 0; i < 9; i++)
+        for(int i = 0; i < 9; i++) //Preenche int com os digitos multiplicados por fatores
         {
             temp[i] = digitos[i]*(11-i);
         }
-        temp[9] = primeiroDigito*2;
+        temp[9] = primeiroDigito*2; //Adiciona o primeiro digito de verificação ja multiplicado
         int segundoDividendo = 0;
         int segundoDigito = -1; //dummy do segundo digito
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 10; i++) //Produz o dividendo do segundo digito
         {
             segundoDividendo = segundoDividendo + temp[i];
         }
-        if(segundoDividendo % 11 < 2)
+        if(segundoDividendo % 11 < 2) //Define o segundo digito verificador
         {
             segundoDigito = 0;
         }
@@ -104,7 +104,7 @@ public class Cliente {
         {
             segundoDigito = 11 - (segundoDividendo % 11);
         }
-        if(digitos[9] == primeiroDigito && digitos[10] == segundoDigito)
+        if(digitos[9] == primeiroDigito && digitos[10] == segundoDigito) //Compara os digitos produzidos com os digitos do CPF
         {
             return true;
         }

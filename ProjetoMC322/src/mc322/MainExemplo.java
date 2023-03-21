@@ -1,7 +1,7 @@
 package mc322;
 
 public class MainExemplo {
-    public static void main(String[] args){
+    public static void main(String[] args){ //Main de exemplo que define um acidente fictício e emite o laudo desse acidente.
         Veiculo Cyberskeleton = new Veiculo("1LOV3LUCY", "Arasaka", "Prototype Cyberskeleton");
         Cliente David = new Cliente("David Martinez", "185.635.910-70", "23/05/2058", 18, "Santo Domingo");
         Seguradora TraumaTeam = new Seguradora("Trauma Team", "(19) 3721-5000", "helpdesk@traumateam.com", "Corpo Plaza, 191");
