@@ -1,0 +1,114 @@
+package lab03;
+import java.util.Date;
+
+public class ClientePF extends Cliente{
+    private final String cpf;
+    private Date dataNascimento;
+
+    public ClientePF(String nome, String endereco, Date dataLicenca, String educacao, String genero,
+            String classeEconomica, Veiculo veiculo, String cpf, Date dataNascimento) {
+        super(nome, endereco, dataLicenca, educacao, genero, classeEconomica, veiculo);
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+    }
+    public String getCpf() {
+        return cpf;
+    }
+    public Date getDataNascimento() {
+        return dataNascimento;
+    }
+    public void setDataNascimento(Date dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+    public boolean validarCPF(){
+        String cpflimpo;
+        cpflimpo = cpf.replaceAll("[^0123456789]","");//Remove caracteres especiais do CPF
+        if (cpflimpo.length() != 11) //Confere numero de caracteres
+        {
+            return false;
+        }
+        if (cpflimpo.equals("00000000000") || cpflimpo.equals("11111111111") 
+        || cpflimpo.equals("22222222222") || cpflimpo.equals("33333333333") 
+        || cpflimpo.equals("44444444444") || cpflimpo.equals("55555555555")
+        || cpflimpo.equals("66666666666") || cpflimpo.equals("77777777777")
+        || cpflimpo.equals("88888888888") || cpflimpo.equals("99999999999")) //Confere se os caracteres são iguais
+        {
+            return false;
+        }
+        int [] digitos = new int[11];
+        for(int i = 0; i < 11; i++) //Transforma o CPF em um vetor de int
+        {
+            digitos[i] = Character.getNumericValue(cpflimpo.charAt(i));
+        }
+        int [] temp = new int[10];
+        for(int i = 0; i < 9; i++) //Multiplica cada digito pelos fatores 
+        {
+            temp[i] = digitos[i]*(10-i);
+        }
+        int primeiroDividendo = 0;
+        int primeiroDigito = -1; //dummy do primeiro digito
+        for(int i = 0; i < 9; i++) //Produz o dividendo do primeiro digito verificador
+        {
+            primeiroDividendo = primeiroDividendo + temp[i];
+        }
+        if(primeiroDividendo % 11 < 2) //Define o primeiro digito verificador
+        {
+            primeiroDigito = 0;
+        }
+        else if(primeiroDividendo % 11 >= 2)
+        {
+            primeiroDigito = 11 - (primeiroDividendo % 11);
+        }
+        for(int i = 0; i < 9; i++) //Preenche temp com os digitos multiplicados por fatores
+        {
+            temp[i] = digitos[i]*(11-i);
+        }
+        temp[9] = primeiroDigito*2; //Adiciona o primeiro digito de verificação ja multiplicado
+        int segundoDividendo = 0;
+        int segundoDigito = -1; //dummy do segundo digito
+        for(int i = 0; i < 10; i++) //Produz o dividendo do segundo digito
+        {
+            segundoDividendo = segundoDividendo + temp[i];
+        }
+        if(segundoDividendo % 11 < 2) //Define o segundo digito verificador
+        {
+            segundoDigito = 0;
+        }
+        else if(segundoDividendo % 11 >= 2)
+        {
+            segundoDigito = 11 - (segundoDividendo % 11);
+        }
+        if(digitos[9] == primeiroDigito && digitos[10] == segundoDigito) //Compara os digitos produzidos com os digitos do CPF
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    public String toString() {
+        String saida = "Informações do Cliente:\n"
+        +"\n    Nome: " + getNome()
+        +"\n    Endereço: " + getEndereco()
+        +"\n    Data da Licença: " + getDataLicenca()
+        +"\n    Educação: " + getEducacao()
+        +"\n    Gênero: " + getGenero()
+        +"\n    Classe Econômica: " + getClasseEconomica()
+        +"\n    Veiculo(s): ";
+        for(Veiculo v: getListaVeiculos())
+        {
+            saida = saida + "         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca() +"\n";
+        }
+        saida = saida + "Validez do CPF: ";
+        if(validarCPF())
+        {
+            saida = saida + "Válido\n\n";
+        }
+        else
+        {
+            saida = saida + "Inválido\n\n";
+        }
+        return saida;
+    }
+}
