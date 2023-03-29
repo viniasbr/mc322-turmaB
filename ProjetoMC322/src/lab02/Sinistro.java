@@ -1,4 +1,4 @@
-package mc322;
+package lab02;
 
 public class Sinistro {
     private int id;

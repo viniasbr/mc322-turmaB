@@ -1,4 +1,4 @@
-package mc322;
+package lab02;
 
 public class MainExemplo {
     public static void main(String[] args){ //Main de exemplo que define um acidente fictício e emite o laudo desse acidente.
