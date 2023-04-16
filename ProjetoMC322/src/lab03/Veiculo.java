@@ -38,10 +38,10 @@ public class Veiculo {
     }
     public String toString() {
         return "Informações do Veículo:\n"
-        +"\n    Placa: " + placa
-        +"\n    Marca: " + marca
-        +"\n    Modelo: " + modelo
-        +"\n    Ano de Fabricação: " + anoFabricacao
+        +"\n    Placa: " + getPlaca()
+        +"\n    Marca: " + getMarca()
+        +"\n    Modelo: " + getModelo()
+        +"\n    Ano de Fabricação: " + getAnoFabricacao()
         +"\n\n"
         ;
     }

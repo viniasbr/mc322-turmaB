@@ -1,15 +1,48 @@
 package lab03;
-import java.util.Date;
+import java.util.Date; //Classe obsoleta, porém o enunciado do lab pedia o uso.
 
 public class ClientePF extends Cliente{
     private final String cpf;
+    private String genero;
+    private Date dataLicenca;
+    private String educacao;
     private Date dataNascimento;
+    private String classeEconomica;
 
-    public ClientePF(String nome, String endereco, Date dataLicenca, String educacao, String genero,
-            String classeEconomica, Veiculo veiculo, String cpf, Date dataNascimento) {
-        super(nome, endereco, dataLicenca, educacao, genero, classeEconomica, veiculo);
+    public ClientePF(String nome, String endereco, Veiculo veiculo, 
+    String cpf, String genero, Date dataLicenca,String educacao, 
+    Date dataNascimento, String classeEconomica) {
+        super(nome, endereco, veiculo);
         this.cpf = cpf;
+        this.genero = genero;
+        this.dataLicenca = dataLicenca;
+        this.educacao = educacao;
         this.dataNascimento = dataNascimento;
+        this.classeEconomica = classeEconomica;
+    }
+    public String getGenero() {
+        return genero;
+    }
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+    public Date getDataLicenca() {
+        return dataLicenca;
+    }
+    public void setDataLicenca(Date dataLicenca) {
+        this.dataLicenca = dataLicenca;
+    }
+    public String getEducacao() {
+        return educacao;
+    }
+    public void setEducacao(String educacao) {
+        this.educacao = educacao;
+    }
+    public String getClasseEconomica() {
+        return classeEconomica;
+    }
+    public void setClasseEconomica(String classeEconomica) {
+        this.classeEconomica = classeEconomica;
     }
     public String getCpf() {
         return cpf;
@@ -87,13 +120,16 @@ public class ClientePF extends Cliente{
             return false;
         }
     }
+    @Override
     public String toString() {
         String saida = "Informações do Cliente:\n"
         +"\n    Nome: " + getNome()
         +"\n    Endereço: " + getEndereco()
-        +"\n    Data da Licença: " + getDataLicenca()
-        +"\n    Educação: " + getEducacao()
+        +"\n    CPF: " + getCpf()
         +"\n    Gênero: " + getGenero()
+        +"\n    Data da Licença: " + getDataLicenca().getDate()+"/"+getDataLicenca().getMonth()+"/"+getDataLicenca().getYear()
+        +"\n    Educação: " + getEducacao()
+        +"\n    Data de Nascimento: " + getDataNascimento().getDate() + "/" + getDataNascimento().getMonth() + "/" + getDataNascimento().getYear()
         +"\n    Classe Econômica: " + getClasseEconomica()
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())
@@ -110,5 +146,10 @@ public class ClientePF extends Cliente{
             saida = saida + "Inválido\n\n";
         }
         return saida;
+    }
+    @Override
+    public String tipoDeCliente()
+    {
+        return "PF";
     }
 }

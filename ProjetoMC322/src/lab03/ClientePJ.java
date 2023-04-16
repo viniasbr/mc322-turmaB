@@ -1,13 +1,12 @@
 package lab03;
-import java.util.Date;
+import java.util.Date; //Classe obsoleta, porém o enunciado do lab pedia o uso.
 
 public class ClientePJ extends Cliente{
     private final String cnpj;
     private Date dataFundacao;
     
-    public ClientePJ(String nome, String endereco, Date dataLicenca,
-            String classeEconomica, Veiculo veiculo, String cnpj, Date dataFundacao) {
-        super(nome, endereco, dataLicenca, "N/A", "N/A", classeEconomica, veiculo);
+    public ClientePJ(String nome, String endereco, Date dataLicenca, String classeEconomica, Veiculo veiculo, String cnpj, Date dataFundacao) {
+        super(nome, endereco, veiculo);
         this.cnpj = cnpj;
         this.dataFundacao = dataFundacao;
     }
@@ -94,14 +93,13 @@ public class ClientePJ extends Cliente{
             return false;
         }
     }
+    @Override
     public String toString() {
         String saida = "Informações do Cliente:\n"
         +"\n    Nome: " + getNome()
         +"\n    Endereço: " + getEndereco()
-        +"\n    Data da Licença: " + getDataLicenca()
-        +"\n    Educação: " + getEducacao()
-        +"\n    Gênero: " + getGenero()
-        +"\n    Classe Econômica: " + getClasseEconomica()
+        +"\n    CNPJ: " + getCnpj()
+        +"\n    dataFundacao: " + getDataFundacao().getDate() + "/" + getDataFundacao().getMonth() + "/" + getDataFundacao().getYear()
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())
         {
@@ -117,5 +115,10 @@ public class ClientePJ extends Cliente{
             saida = saida + "Inválido\n\n";
         }
         return saida;
+    }
+    @Override
+    public String tipoDeCliente()
+    {
+        return "PJ";
     }
 }
