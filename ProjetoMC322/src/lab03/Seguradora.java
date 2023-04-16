@@ -66,7 +66,7 @@ public class Seguradora {
             {
                 estaNaLista = true;
                 listaClientes.remove(i);
-                return estaNaLista;
+                break;
             }
         }
         return estaNaLista;
@@ -95,5 +95,27 @@ public class Seguradora {
         }
         listaSinistros.add(sinistro);
         return !estaNaLista;
+    }
+    public boolean visualizarSinistro(String cliente)//O enunciado especifica que esse método deve ter retorno booleano, assim, assume-se que ele confirma ou nega se o cliente possui sinistro
+    {
+        boolean estaNaLista = false;
+        for(Cliente c: listaClientes)
+        {
+            if(c.getNome().equalsIgnoreCase(cliente))
+            {
+                estaNaLista = true;
+                break;
+            }
+        }
+        return estaNaLista;
+    }
+    public String listarSinistros()
+    {
+        String saida = "";
+        for(Sinistro s: listaSinistros)
+        {
+            saida = saida + s.toString();
+        }
+        return saida;
     }
 }
