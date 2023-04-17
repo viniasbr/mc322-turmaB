@@ -1,17 +1,17 @@
 package lab03;
-import java.util.Date; //Classe obsoleta, porém o enunciado do lab pedia o uso.
+import java.time.LocalDate; //Classe obsoleta, porém o enunciado do lab pedia o uso.
 
 public class ClientePF extends Cliente{
     private final String cpf;
     private String genero;
-    private Date dataLicenca;
+    private LocalDate dataLicenca;
     private String educacao;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private String classeEconomica;
 
     public ClientePF(String nome, String endereco, Veiculo veiculo, 
-    String cpf, String genero, Date dataLicenca,String educacao, 
-    Date dataNascimento, String classeEconomica) {
+    String cpf, String genero, LocalDate dataLicenca,String educacao, 
+    LocalDate dataNascimento, String classeEconomica) {
         super(nome, endereco, veiculo);
         this.cpf = cpf;
         this.genero = genero;
@@ -26,10 +26,10 @@ public class ClientePF extends Cliente{
     public void setGenero(String genero) {
         this.genero = genero;
     }
-    public Date getDataLicenca() {
+    public LocalDate getDataLicenca() {
         return dataLicenca;
     }
-    public void setDataLicenca(Date dataLicenca) {
+    public void setDataLicenca(LocalDate dataLicenca) {
         this.dataLicenca = dataLicenca;
     }
     public String getEducacao() {
@@ -47,10 +47,10 @@ public class ClientePF extends Cliente{
     public String getCpf() {
         return cpf;
     }
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
     public boolean validarCPF(){
@@ -127,9 +127,9 @@ public class ClientePF extends Cliente{
         +"\n    Endereço: " + getEndereco()
         +"\n    CPF: " + getCpf()
         +"\n    Gênero: " + getGenero()
-        +"\n    Data da Licença: " + getDataLicenca().getDate()+"/"+getDataLicenca().getMonth()+"/"+getDataLicenca().getYear()
+        +"\n    Data da Licença: " + getDataLicenca().getDayOfYear()+"/"+getDataLicenca().getMonth()+"/"+getDataLicenca().getYear()
         +"\n    Educação: " + getEducacao()
-        +"\n    Data de Nascimento: " + getDataNascimento().getDate() + "/" + getDataNascimento().getMonth() + "/" + getDataNascimento().getYear()
+        +"\n    Data de Nascimento: " + getDataNascimento().getDayOfYear() + "/" + getDataNascimento().getMonth() + "/" + getDataNascimento().getYear()
         +"\n    Classe Econômica: " + getClasseEconomica()
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())

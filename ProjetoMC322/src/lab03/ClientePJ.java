@@ -1,11 +1,11 @@
 package lab03;
-import java.util.Date; //Classe obsoleta, porém o enunciado do lab pedia o uso.
+import java.time.LocalDate; //Classe obsoleta, porém o enunciado do lab pedia o uso.
 
 public class ClientePJ extends Cliente{
     private final String cnpj;
-    private Date dataFundacao;
+    private LocalDate dataFundacao;
     
-    public ClientePJ(String nome, String endereco, Date dataLicenca, String classeEconomica, Veiculo veiculo, String cnpj, Date dataFundacao) {
+    public ClientePJ(String nome, String endereco, Veiculo veiculo, String cnpj, LocalDate dataFundacao) {
         super(nome, endereco, veiculo);
         this.cnpj = cnpj;
         this.dataFundacao = dataFundacao;
@@ -13,10 +13,10 @@ public class ClientePJ extends Cliente{
     public String getCnpj() {
         return cnpj;
     }
-    public Date getDataFundacao() {
+    public LocalDate getDataFundacao() {
         return dataFundacao;
     }
-    public void setDataFundacao(Date dataFundacao) {
+    public void setDataFundacao(LocalDate dataFundacao) {
         this.dataFundacao = dataFundacao;
     }
     public boolean validarCNPJ(){
@@ -99,7 +99,7 @@ public class ClientePJ extends Cliente{
         +"\n    Nome: " + getNome()
         +"\n    Endereço: " + getEndereco()
         +"\n    CNPJ: " + getCnpj()
-        +"\n    dataFundacao: " + getDataFundacao().getDate() + "/" + getDataFundacao().getMonth() + "/" + getDataFundacao().getYear()
+        +"\n    dataFundacao: " + getDataFundacao().getDayOfYear() + "/" + getDataFundacao().getMonth() + "/" + getDataFundacao().getYear()
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())
         {
