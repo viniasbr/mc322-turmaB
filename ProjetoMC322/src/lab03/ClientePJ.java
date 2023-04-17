@@ -1,5 +1,5 @@
 package lab03;
-import java.time.LocalDate; //Classe obsoleta, porém o enunciado do lab pedia o uso.
+import java.time.LocalDate;
 
 public class ClientePJ extends Cliente{
     private final String cnpj;
