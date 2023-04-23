@@ -9,6 +9,7 @@ public class Cliente {
     public Cliente(String nome, String endereco, Veiculo veiculo) {
         this.nome = nome;
         this.endereco = endereco;
+        this.listaVeiculos = new ArrayList<Veiculo>();
         listaVeiculos.add(veiculo);
     }
     public String getNome() {

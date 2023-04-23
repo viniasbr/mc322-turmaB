@@ -134,9 +134,9 @@ public class ClientePF extends Cliente{
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())
         {
-            saida = saida + "         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca() +"\n";
+            saida = saida + "\n         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca();
         }
-        saida = saida + "Validez do CPF: ";
+        saida = saida + "\n    Validez do CPF: ";
         if(validarCPF())
         {
             saida = saida + "Válido\n\n";

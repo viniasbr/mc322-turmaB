@@ -11,6 +11,7 @@ public class Main {
         ArrayList<Seguradora> listaSeguradoras = new ArrayList<Seguradora>();
         Scanner entrada = new Scanner(System.in);
         DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String entradaTemp = "";
         selecao.add(0,0);
         while(selecao.get(0) != 4) //Camada 0 do menu
         {
@@ -22,7 +23,22 @@ public class Main {
                 +"\n    4 - Sair"
                 +"\nOpção: "
             );
-            selecao.add(0,Integer.parseInt(entrada.nextLine()));
+            entradaTemp = entrada.nextLine();
+            Boolean erroOcorreu = false;
+            try {
+                Integer.parseInt(entradaTemp);
+            } catch (Exception e) {
+                erroOcorreu = true;
+            }
+            if(erroOcorreu)
+            {
+                selecao.add(0,0);
+                erroOcorreu = false;
+            }
+            else
+            {
+                selecao.add(0,Integer.parseInt(entradaTemp));
+            }
             switch(selecao.get(0))
             {
                 case 1:
@@ -51,8 +67,21 @@ public class Main {
                     saida = saida +"\n    "+(listaSeguradoras.size()+1)+" - Retornar ao Menu Principal";
                     saida = saida +"\nOpção: ";
                     System.out.print(saida);
-                    selecao.add(1,Integer.parseInt(entrada.nextLine()));
-                    System.out.print("\n");
+                    entradaTemp = entrada.nextLine();
+                    try {
+                        Integer.parseInt(entradaTemp);
+                    } catch (Exception e) {
+                        erroOcorreu = true;
+                    }
+                    if(erroOcorreu)
+                    {
+                        selecao.add(1, 0);
+                        erroOcorreu = false;
+                    }
+                    else
+                    {
+                        selecao.add(1,Integer.parseInt(entradaTemp));
+                    }
                     if(selecao.get(1)-1 < listaSeguradoras.size() && selecao.get(1)-1 >= 0)
                     {
                         selecao.add(2,0);
@@ -68,7 +97,21 @@ public class Main {
                                 +"\n    6 - Retornar ao Menu Principal"
                                 +"\nOpção: "
                                 );
-                            selecao.add(2,Integer.parseInt(entrada.nextLine()));
+                            entradaTemp = entrada.nextLine();
+                            try {
+                                Integer.parseInt(entradaTemp);
+                            } catch (Exception e) {
+                                erroOcorreu = true;
+                            }
+                            if(erroOcorreu)
+                            {
+                                selecao.add(2, 0);
+                                erroOcorreu = false;
+                            }
+                            else
+                            {
+                                selecao.add(2, Integer.parseInt(entradaTemp));
+                            }
                             System.out.print("\n");
                             switch(selecao.get(2))
                             {
@@ -81,7 +124,20 @@ public class Main {
                                         +"\n    3 - Retornar ao Menu da Seguradora"
                                         +"\nOpção: "
                                     );
-                                    selecao.add(3,Integer.parseInt(entrada.nextLine()));
+                                    entradaTemp = entrada.nextLine();
+                                    try {
+                                        Integer.parseInt(entradaTemp);
+                                    } catch (Exception e) {
+                                        erroOcorreu = true;
+                                    }
+                                    if(erroOcorreu)
+                                    {
+                                        selecao.add(3, 0);
+                                    }
+                                    else
+                                    {
+                                        selecao.add(3, Integer.parseInt(entradaTemp));
+                                    }
                                     switch(selecao.get(3))
                                     {
                                         case 1:
@@ -105,7 +161,7 @@ public class Main {
                                                 LocalDate.parse(datalpfstring, formatador);
                                                 LocalDate.parse(datanpfstring, formatador);
                                             } catch (Exception e) {
-                                                System.out.println("Erro: Data(s) inválida(s)");
+                                                System.out.print("Erro: Data(s) inválida(s)\n");
                                                 break;
                                             }
                                             LocalDate dataLicencaPF = LocalDate.parse(datalpfstring, formatador);
@@ -117,7 +173,14 @@ public class Main {
                                             System.out.print("Insira o modelo do veículo do Cliente: ");
                                             String modelovpf = entrada.nextLine();
                                             System.out.print("Insira o ano de fabricação do veículo do Cliente: ");
-                                            int anofabvpf = Integer.parseInt(entrada.nextLine());
+                                            entradaTemp = entrada.nextLine();
+                                            try {
+                                                Integer.parseInt(entradaTemp);
+                                            } catch (Exception e) {
+                                                System.out.print("Ano de fabricação inválido.\n\n");
+                                                break;
+                                            }
+                                            int anofabvpf = Integer.parseInt(entradaTemp);
                                             ClientePF clientePF = new ClientePF(nomepf, enderecopf, new Veiculo(placavpf, marcavpf, modelovpf, anofabvpf), cpf, genero, dataLicencaPF, educacaopf, dataNascimentoPF, classeecono);
                                             if(!clientePF.validarCPF())
                                             {
@@ -125,7 +188,7 @@ public class Main {
                                                 break;
                                             }
                                             listaSeguradoras.get(selecao.get(1)-1).cadastrarCliente(clientePF);
-                                            System.out.print("Cliente Pessoa Física cadastrado com sucesso.\n");
+                                            System.out.print("Cliente Pessoa Física cadastrado com sucesso.\n\n");
                                             break;
                                         case 2:
                                             System.out.print("\nInsira o nome do Cliente: ");
@@ -139,7 +202,7 @@ public class Main {
                                             try {
                                                 LocalDate.parse(datafpjstring, formatador);
                                             } catch (Exception e) {
-                                                System.out.println("Erro: Data(s) inválida(s)");
+                                                System.out.print("Erro: Data(s) inválida(s)\n");
                                             break;
                                             }
                                             LocalDate dataFundacaoPJ = LocalDate.parse(datafpjstring, formatador);
@@ -150,28 +213,153 @@ public class Main {
                                             System.out.print("Insira o modelo do veículo do Cliente: ");
                                             String modelovpj = entrada.nextLine();
                                             System.out.print("Insira o ano de fabricação do veículo do Cliente: ");
-                                            int anofabvpj = Integer.parseInt(entrada.nextLine());
+                                            entradaTemp = entrada.nextLine();
+                                            try {
+                                                Integer.parseInt(entradaTemp);
+                                            } catch (Exception e) {
+                                                System.out.print("Ano de fabricação inválido.\n\n");
+                                                break;
+                                            }
+                                            int anofabvpj = Integer.parseInt(entradaTemp);
                                             ClientePJ clientePJ = new ClientePJ(nomepj, enderecopj, new Veiculo(placavpj, marcavpj, modelovpj, anofabvpj), cnpj, dataFundacaoPJ);
                                             if(!clientePJ.validarCNPJ())
                                             {
-                                                System.out.print("CNPJ do Cliente inválido.\n");
+                                                System.out.print("CNPJ do Cliente inválido\n\n");
                                                 break;
                                             }
                                             listaSeguradoras.get(selecao.get(1)-1).cadastrarCliente(clientePJ);
-                                            System.out.print("Cliente Pessoa Jurídica cadastrado com sucesso.\n");
+                                            System.out.print("Cliente Pessoa Jurídica cadastrado com sucesso.\n\n");
                                             break;
                                         case 3://Volta ao menu da seguradora
                                             System.out.print("\n");
                                             break;
                                         default:
-                                            System.out.println("Selecione uma opção válida.\n");
+                                            System.out.print("Selecione uma opção válida.\n");
                                     }
                                     break;
-                                case 2:
-                                    //TODO: ToString Cliente
+                                case 2: //Camada 4 do menu.
+                                    selecao.add(4, 0);
+                                    if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size() <= 0)
+                                    {
+                                        System.out.print("Nenhum cliente cadastrado na seguradora " + listaSeguradoras.get(selecao.get(1)-1).getNome() + ".\n\n");
+                                        break;
+                                    }
+                                    saida = "";
+                                    saida = saida + "Selecione o cliente:";
+                                    for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
+                                    {
+                                        saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
+                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PF")
+                                        {
+                                            saida = saida + " (Pessoa Física)";
+                                        }
+                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PJ")
+                                        {
+                                            saida = saida + " (Pessoa Jurídica)";
+                                        }
+                                    }
+                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Voltar";
+                                    saida = saida + "\nOpção: ";
+                                    System.out.print(saida);
+                                    entradaTemp = entrada.nextLine();
+                                    try {
+                                        Integer.parseInt(entradaTemp);
+                                    } catch (Exception e) {
+                                        erroOcorreu = true;
+                                    }
+                                    if(erroOcorreu)
+                                    {
+                                        selecao.add(4, 0);
+                                        erroOcorreu = false;
+                                    }
+                                    else
+                                    {
+                                        selecao.add(4, Integer.parseInt(entradaTemp));
+                                    }
+                                    if(selecao.get(4)-1 < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size() && selecao.get(4) - 1 >= 0)
+                                    {
+                                        System.out.print("\n"+listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).toString());
+                                    }
+                                    else if(selecao.get(4)-1 == listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size())
+                                    {
+                                        System.out.print("\n");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        System.out.print("Selecione uma opção válida.\n");
+                                        break;
+                                    }
                                     break;
-                                case 3:
-                                    //TODO: Adicionar Veiculo ao Cliente
+                                case 3: //Camada 4 do menu. selecao.get(4)-1 é o índice do cliente na lista da seguradora.
+                                    selecao.add(4, 0);
+                                    if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size() <= 0)
+                                    {
+                                        System.out.print("Nenhum cliente cadastrado na seguradora " + listaSeguradoras.get(selecao.get(1)-1).getNome() + ".\n\n");
+                                        break;
+                                    }
+                                    saida = "";
+                                    saida = saida + "Selecione o cliente:";
+                                    for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
+                                    {
+                                        saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
+                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PF")
+                                        {
+                                            saida = saida + " (Pessoa Física)";
+                                        }
+                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PJ")
+                                        {
+                                            saida = saida + " (Pessoa Jurídica)";
+                                        }
+                                    }
+                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Voltar";
+                                    saida = saida + "\nOpção: ";
+                                    System.out.print(saida);
+                                    entradaTemp = entrada.nextLine();
+                                    try {
+                                        Integer.parseInt(entradaTemp);
+                                    } catch (Exception e) {
+                                        erroOcorreu = true;
+                                    }
+                                    if(erroOcorreu)
+                                    {
+                                        selecao.add(4, 0);
+                                        erroOcorreu = false;
+                                    }
+                                    else
+                                    {
+                                        selecao.add(4, Integer.parseInt(entradaTemp));
+                                    }
+                                    if(selecao.get(4)-1 < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size() && selecao.get(4) - 1 >= 0)
+                                    {
+                                        System.out.print("Insira a placa do veículo do Cliente: ");
+                                        String placav = entrada.nextLine();
+                                        System.out.print("Insira a marca do veículo do Cliente: ");
+                                        String marcav = entrada.nextLine();
+                                        System.out.print("Insira o modelo do veículo do Cliente: ");
+                                        String modelov = entrada.nextLine();
+                                        System.out.print("Insira o ano de fabricação do veículo do Cliente: ");
+                                        entradaTemp = entrada.nextLine();
+                                        try {
+                                            Integer.parseInt(entradaTemp);
+                                        } catch (Exception e) {
+                                            System.out.print("Ano de fabricação inválido.\n\n");
+                                            break;
+                                        }
+                                        int anofabv = Integer.parseInt(entradaTemp);
+                                        listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).addVeiculo(new Veiculo(placav, marcav, modelov, anofabv));
+                                        System.out.print("Veículo adicionado com sucesso.\n\n");
+                                    }
+                                    else if(selecao.get(4)-1 == listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size())
+                                    {
+                                        System.out.print("\n");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        System.out.print("Selecione uma opção válida.\n");
+                                        break;
+                                    }
                                     break;
                                 case 4:
                                     //TODO: Criar Sinistro
@@ -183,18 +371,17 @@ public class Main {
                                     System.out.print("\n");
                                     break;
                                 default:
-                                    System.out.println("Selecione uma opção válida.\n");
+                                    System.out.print("Selecione uma opção válida.\n");
                             }
                         }
                     }
                     else if(selecao.get(1)-1 == listaSeguradoras.size()) //Voltar ao menu
                     {
-                        System.out.print("\n");
                         break;
                     }
                     else
                     {
-                        System.out.print("Selecione uma opção válida.\n");
+                        System.out.print("Selecione uma opção válida.\n\n");
                     }
                     break;
                 case 3:
@@ -203,7 +390,7 @@ public class Main {
                 case 4:
                     break; //Case 4 implica em selecao.get(0) = 4, o que sai do main loop.
                 default:
-                    System.out.println("Selecione uma opção válida.\n");
+                    System.out.print("Selecione uma opção válida.\n\n");
             }
         }
         entrada.close();

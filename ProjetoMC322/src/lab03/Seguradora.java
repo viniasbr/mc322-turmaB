@@ -10,6 +10,8 @@ public class Seguradora {
     private ArrayList<Cliente> listaClientes;
 
     public Seguradora(String nome, String telefone, String email, String endereco) {
+        this.listaClientes = new ArrayList<Cliente>();
+        this.listaSinistros = new ArrayList<Sinistro>();
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;

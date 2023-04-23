@@ -103,9 +103,9 @@ public class ClientePJ extends Cliente{
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())
         {
-            saida = saida + "         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca() +"\n";
+            saida = saida + "\n         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca();
         }
-        saida = saida + "Validez do CNPJ: ";
+        saida = saida + "\n    Validez do CNPJ: ";
         if(validarCNPJ())
         {
             saida = saida + "Válido\n\n";
