@@ -88,7 +88,7 @@ public class Main {
                         while(selecao.get(2) != 6)
                         {
                             System.out.print( //Camada 2 do menu
-                                "Sistema da Seguradora " + listaSeguradoras.get(selecao.get(1)-1).getNome() + ". Digite o número correspondente para:"
+                                "\nSistema da Seguradora " + listaSeguradoras.get(selecao.get(1)-1).getNome() + ". Digite o número correspondente para:"
                                 +"\n    1 - Registrar Novo Cliente"
                                 +"\n    2 - Resgatar Informações do Cliente"
                                 +"\n    3 - Registrar Novo Veículo do Cliente"
@@ -112,13 +112,12 @@ public class Main {
                             {
                                 selecao.add(2, Integer.parseInt(entradaTemp));
                             }
-                            System.out.print("\n");
                             switch(selecao.get(2))
                             {
                                 case 1://Camada 3 do menu
                                     selecao.add(3,0);
                                     System.out.print(
-                                        "Selecione o tipo de cliente:"
+                                        "\nSelecione o tipo de cliente:"
                                         +"\n    1 - Pessoa Física"
                                         +"\n    2 - Pessoa Jurídica"
                                         +"\n    3 - Retornar ao Menu da Seguradora"
@@ -245,7 +244,7 @@ public class Main {
                                         break;
                                     }
                                     saida = "";
-                                    saida = saida + "Selecione o cliente:";
+                                    saida = saida + "\nSelecione o cliente:";
                                     for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
                                     {
                                         saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
@@ -258,7 +257,7 @@ public class Main {
                                             saida = saida + " (Pessoa Jurídica)";
                                         }
                                     }
-                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Voltar";
+                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Retornar ao Menu da Seguradora";
                                     saida = saida + "\nOpção: ";
                                     System.out.print(saida);
                                     entradaTemp = entrada.nextLine();
@@ -299,7 +298,7 @@ public class Main {
                                         break;
                                     }
                                     saida = "";
-                                    saida = saida + "Selecione o cliente:";
+                                    saida = saida + "\nSelecione o cliente:";
                                     for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
                                     {
                                         saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
@@ -312,7 +311,7 @@ public class Main {
                                             saida = saida + " (Pessoa Jurídica)";
                                         }
                                     }
-                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Voltar";
+                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Retornar ao Menu da Seguradora";
                                     saida = saida + "\nOpção: ";
                                     System.out.print(saida);
                                     entradaTemp = entrada.nextLine();
@@ -362,16 +361,118 @@ public class Main {
                                     }
                                     break;
                                 case 4:
-                                    //TODO: Criar Sinistro
+                                    selecao.add(4, 0);
+                                    if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size() <= 0)
+                                    {
+                                        System.out.print("Nenhum cliente cadastrado na seguradora " + listaSeguradoras.get(selecao.get(1)-1).getNome() + ".\n\n");
+                                        break;
+                                    }
+                                    saida = "";
+                                    saida = saida + "\nSelecione o cliente:";
+                                    for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
+                                    {
+                                        saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
+                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PF")
+                                        {
+                                            saida = saida + " (Pessoa Física)";
+                                        }
+                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PJ")
+                                        {
+                                            saida = saida + " (Pessoa Jurídica)";
+                                        }
+                                    }
+                                    saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size()+1) + " - Retornar ao Menu da Seguradora";
+                                    saida = saida + "\nOpção: ";
+                                    System.out.print(saida);
+                                    entradaTemp = entrada.nextLine();
+                                    try {
+                                        Integer.parseInt(entradaTemp);
+                                    } catch (Exception e) {
+                                        erroOcorreu = true;
+                                    }
+                                    if(erroOcorreu)
+                                    {
+                                        selecao.add(4, 0);
+                                        erroOcorreu = false;
+                                    }
+                                    else
+                                    {
+                                        selecao.add(4, Integer.parseInt(entradaTemp));
+                                    }
+                                    if(selecao.get(4)-1 < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size() && selecao.get(4) - 1 >= 0)//Camada 5 do menu. selecao.get(5)-1 retorna o índice do veículo do cliente
+                                    {
+                                        selecao.add(5, 0);
+                                        //listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos();
+                                        saida = "";
+                                        saida = saida + "Selecione o veículo:";
+                                        for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().size(); i++)
+                                        {
+                                            saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().get(i).getMarca() + " "+ listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().get(i).getModelo() + " " + + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().get(i).getAnoFabricacao() + ", Placa: "+ listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().get(i).getPlaca();
+                                        }
+                                        saida = saida + "\n    " + (listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().size()+1) + " - Retornar ao Menu da Seguradora";
+                                        saida = saida + "\nOpção: ";
+                                        System.out.print(saida);
+                                        entradaTemp = entrada.nextLine();
+                                        try {
+                                            Integer.parseInt(entradaTemp);
+                                        } catch (Exception e) {
+                                            erroOcorreu = true;
+                                        }
+                                        if(erroOcorreu)
+                                        {
+                                            selecao.add(5, 0);
+                                            erroOcorreu = false;
+                                        }
+                                        else
+                                        {
+                                            selecao.add(5, Integer.parseInt(entradaTemp));
+                                        }
+                                        if(selecao.get(5)-1 < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().size() && selecao.get(5) - 1 >= 0)
+                                        {
+                                            System.out.print("Insira a data do acidente (em formato dd/mm/aaaa):");
+                                            String datasin = entrada.nextLine();
+                                            System.out.print("Insira o endereço do local do acidente: ");
+                                            String enderecosin = entrada.nextLine();
+                                            listaSeguradoras.get(selecao.get(1)-1).gerarSinistro(new Sinistro(datasin, enderecosin, listaSeguradoras.get(selecao.get(1)-1), listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().get(selecao.get(5)-1), listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1)));
+                                            System.out.print("Sinistro gerado com sucesso.\n\n");
+                                        }
+                                        else if(selecao.get(5)-1 == listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(selecao.get(4)-1).getListaVeiculos().size())
+                                        {
+                                            System.out.print("\n\n");
+                                            break;
+                                        }
+                                        else
+                                        {
+                                        System.out.print("Selecione uma opção válida.\n\n");
+                                        break;
+                                        }
+                                    }
+                                    else if(selecao.get(4)-1 == listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size())
+                                    {
+                                        System.out.print("\n\n");
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        System.out.print("Selecione uma opção válida.\n\n");
+                                        break;
+                                    }
                                     break;
                                 case 5:
-                                    //TODO: ToString Sinistro
+                                    if(listaSeguradoras.get(selecao.get(1)-1).getListaSinistros().size() <= 0)
+                                    {
+                                        System.out.print("Nenhum sinistro foi gerado.\n\n");
+                                    }
+                                    else
+                                    {
+                                        System.out.print(listaSeguradoras.get(selecao.get(1)-1).listarSinistros());
+                                    }
                                     break;
                                 case 6: //Voltar ao menu
                                     System.out.print("\n");
                                     break;
                                 default:
-                                    System.out.print("Selecione uma opção válida.\n");
+                                    System.out.print("Selecione uma opção válida.\n\n");
                             }
                         }
                     }
@@ -385,7 +486,32 @@ public class Main {
                     }
                     break;
                 case 3:
-                    //TODO: Demo
+                    Seguradora seguradoraDemo = new Seguradora("Demo LTDA", "(00) 1234-5678", "demo@demo.com", "Rua Exemplo, 123");
+                    Cliente aSerRemovido = new ClientePJ("Empresa que será removida", "Rua Teste, 456", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010) , "58.619.673/0001-04", LocalDate.parse("10/10/2010", formatador));
+                    seguradoraDemo.cadastrarCliente(aSerRemovido);
+                    System.out.print("\nCliente de teste adicionado:\n\n"+seguradoraDemo.listarClientes("PJ"));
+                    seguradoraDemo.removerCliente(aSerRemovido);
+                    System.out.print("Se a saída for vazio, o cliente foi removido:\n\n"+seguradoraDemo.listarClientes("PJ"));
+                    Cliente exemploPF = new ClientePF("Ana Borges Carvalho", "Rua da Casa de Exemplo", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010), "999.166.140-91", "Feminino", LocalDate.parse("11/11/2011", formatador), "Ensino Médio Completo", LocalDate.parse("01/01/2001", formatador), "Classe Média");
+                    ClientePJ exemploPJ = new ClientePJ("Empresa ABC", "Rua Teste, 789", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010) , "77.685.935/0001-83", LocalDate.parse("09/09/2009", formatador));
+                    seguradoraDemo.cadastrarCliente(exemploPF);
+                    seguradoraDemo.cadastrarCliente(exemploPJ);
+                    System.out.print("\nCliente Pessoa Física de Teste:\n\n"+seguradoraDemo.listarClientes("PF"));
+                    System.out.print("\nCliente Pessoa Jurídica de Teste:\n\n"+seguradoraDemo.listarClientes("PJ"));
+                    Veiculo carroDoAcidente = new Veiculo("OPS1234", "WorstCarsEver", "Bumper", 2023);
+                    seguradoraDemo.getListaClientes().get(1).addVeiculo(carroDoAcidente);
+                    System.out.print("\nAgora, a Empresa ABC cadastrou um carro que irá bater. " + carroDoAcidente.toString());
+                    System.out.print("\nO cadastro da Empresa ABC agora consta:\n\n "+ seguradoraDemo.getListaClientes().get(1).toString());
+                    seguradoraDemo.gerarSinistro(new Sinistro("23/04/2023", "Rua do Azar, 1234", seguradoraDemo, seguradoraDemo.getListaClientes().get(1).getListaVeiculos().get(1), seguradoraDemo.getListaClientes().get(1)));
+                    System.out.print("\nO carro bateu. O sinistro foi gerado? "+seguradoraDemo.visualizarSinistro("Empresa ABC"));
+                    System.out.print("\n\nO sinistro gerado consta: "+seguradoraDemo.listarSinistros());
+                    System.out.print("Por fim, será impresso um toString de cada classe.\n\n");
+                    System.out.println(new Cliente("Nem PF nem PJ", "Rua que não existe", carroDoAcidente).toString());
+                    System.out.println(seguradoraDemo.getListaClientes().get(0).toString());
+                    System.out.println(seguradoraDemo.getListaClientes().get(1).toString());
+                    System.out.println(seguradoraDemo.toString()); //TODO: toString da Seguradora
+                    System.out.println(seguradoraDemo.getListaSinistros().get(0).toString());
+                    System.out.println(seguradoraDemo.getListaClientes().get(1).getListaVeiculos().get(0).toString());
                     break;
                 case 4:
                     break; //Case 4 implica em selecao.get(0) = 4, o que sai do main loop.

@@ -62,6 +62,7 @@ public class Sinistro {
         +"\n    Seguradora: " + getSeguradora().getNome()
         +"\n    Veiculo: " + getVeiculo().getMarca() + " " + getVeiculo().getModelo() + " " + getVeiculo().getAnoFabricacao() + ", Placa: " + getVeiculo().getPlaca()
         +"\n    Cliente: " + getCliente().getNome()
+        +"\n    Tipo do Cliente: " + getCliente().tipoDeCliente()
         +"\n\n"
         ;
     }

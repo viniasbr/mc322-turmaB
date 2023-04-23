@@ -1,5 +1,6 @@
 package lab03;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ClientePF extends Cliente{
     private final String cpf;
@@ -122,14 +123,14 @@ public class ClientePF extends Cliente{
     }
     @Override
     public String toString() {
-        String saida = "Informações do Cliente:\n"
+        String saida = "Informações do Cliente Pessoa Física:\n"
         +"\n    Nome: " + getNome()
         +"\n    Endereço: " + getEndereco()
         +"\n    CPF: " + getCpf()
         +"\n    Gênero: " + getGenero()
-        +"\n    Data da Licença: " + getDataLicenca().getDayOfYear()+"/"+getDataLicenca().getMonth()+"/"+getDataLicenca().getYear()
+        +"\n    Data da Licença: " + getDataLicenca().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         +"\n    Educação: " + getEducacao()
-        +"\n    Data de Nascimento: " + getDataNascimento().getDayOfYear() + "/" + getDataNascimento().getMonth() + "/" + getDataNascimento().getYear()
+        +"\n    Data de Nascimento: " + getDataNascimento().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         +"\n    Classe Econômica: " + getClasseEconomica()
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())

@@ -1,5 +1,6 @@
 package lab03;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class ClientePJ extends Cliente{
     private final String cnpj;
@@ -95,11 +96,11 @@ public class ClientePJ extends Cliente{
     }
     @Override
     public String toString() {
-        String saida = "Informações do Cliente:\n"
+        String saida = "Informações do Cliente Pessoa Jurídica:\n"
         +"\n    Nome: " + getNome()
         +"\n    Endereço: " + getEndereco()
         +"\n    CNPJ: " + getCnpj()
-        +"\n    dataFundacao: " + getDataFundacao().getDayOfYear() + "/" + getDataFundacao().getMonth() + "/" + getDataFundacao().getYear()
+        +"\n    dataFundacao: " + getDataFundacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"))
         +"\n    Veiculo(s): ";
         for(Veiculo v: getListaVeiculos())
         {

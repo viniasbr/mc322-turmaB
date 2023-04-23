@@ -120,4 +120,17 @@ public class Seguradora {
         }
         return saida;
     }
+    @Override
+    public String toString() {
+        return "Informações da Seguradora: "
+        +"\n    Nome: " +getNome()
+        +"\n    Telefone: " +getTelefone()
+        +"\n    Email: " +getEmail()
+        +"\n    Endereço: " +getEndereco()
+        +"\n    Clientes de Pessoa Física:\n        " +listarClientes("PF")
+        +"\n    Clientes de Pessoa Jurídica:\n        " +listarClientes("PF")
+        +"\n    Sinistros:\n         " +listarSinistros()
+        +"\n\n";
+    }
+    
 }
