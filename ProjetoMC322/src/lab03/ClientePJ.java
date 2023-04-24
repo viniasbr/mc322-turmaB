@@ -109,11 +109,11 @@ public class ClientePJ extends Cliente{
         saida = saida + "\n    Validez do CNPJ: ";
         if(validarCNPJ())
         {
-            saida = saida + "Válido\n\n";
+            saida = saida + "Válido\n";
         }
         else
         {
-            saida = saida + "Inválido\n\n";
+            saida = saida + "Inválido\n";
         }
         return saida;
     }

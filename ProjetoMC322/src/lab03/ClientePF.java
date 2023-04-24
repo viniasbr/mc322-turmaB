@@ -144,7 +144,7 @@ public class ClientePF extends Cliente{
         }
         else
         {
-            saida = saida + "Inválido\n\n";
+            saida = saida + "Inválido\n";
         }
         return saida;
     }
