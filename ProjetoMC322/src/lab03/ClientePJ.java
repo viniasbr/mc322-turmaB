@@ -22,7 +22,7 @@ public class ClientePJ extends Cliente{
     }
     public boolean validarCNPJ(){
         String cnpjlimpo;
-        cnpjlimpo = cnpj.replaceAll("[^0123456789]","");//Remove caracteres especiais do CNPJ
+        cnpjlimpo = this.cnpj.replaceAll("[^0123456789]","");//Remove caracteres especiais do CNPJ
         if(cnpjlimpo.length() != 14)
         {
             return false;

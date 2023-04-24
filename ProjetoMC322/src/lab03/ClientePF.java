@@ -56,7 +56,7 @@ public class ClientePF extends Cliente{
     }
     public boolean validarCPF(){
         String cpflimpo;
-        cpflimpo = cpf.replaceAll("[^0123456789]","");//Remove caracteres especiais do CPF
+        cpflimpo = this.cpf.replaceAll("[^0123456789]","");//Remove caracteres especiais do CPF
         if (cpflimpo.length() != 11) //Confere numero de caracteres
         {
             return false;

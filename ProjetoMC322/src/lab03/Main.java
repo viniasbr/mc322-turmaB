@@ -487,16 +487,18 @@ public class Main {
                     break;
                 case 3:
                     Seguradora seguradoraDemo = new Seguradora("Demo LTDA", "(00) 1234-5678", "demo@demo.com", "Rua Exemplo, 123");
-                    Cliente aSerRemovido = new ClientePJ("Empresa que será removida", "Rua Teste, 456", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010) , "58.619.673/0001-04", LocalDate.parse("10/10/2010", formatador));
+                    ClientePJ aSerRemovido = new ClientePJ("Empresa que será removida", "Rua Teste, 456", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010) , "58.619.673/0001-04", LocalDate.parse("10/10/2010", formatador));
                     seguradoraDemo.cadastrarCliente(aSerRemovido);
                     System.out.print("\nCliente de teste adicionado:\n\n"+seguradoraDemo.listarClientes("PJ"));
                     seguradoraDemo.removerCliente(aSerRemovido);
                     System.out.print("Se a saída for vazio, o cliente foi removido:\n\n"+seguradoraDemo.listarClientes("PJ"));
-                    Cliente exemploPF = new ClientePF("Ana Borges Carvalho", "Rua da Casa de Exemplo", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010), "999.166.140-91", "Feminino", LocalDate.parse("11/11/2011", formatador), "Ensino Médio Completo", LocalDate.parse("01/01/2001", formatador), "Classe Média");
-                    ClientePJ exemploPJ = new ClientePJ("Empresa ABC", "Rua Teste, 789", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010) , "77.685.935/0001-83", LocalDate.parse("09/09/2009", formatador));
+                    ClientePF exemploPF = new ClientePF ("Ana Borges Carvalho", "Rua da Casa de Exemplo", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010), "999.166.140-91", "Feminino", LocalDate.parse("11/11/2011", formatador), "Ensino Médio Completo", LocalDate.parse("01/01/2001", formatador), "Classe Média");
+                    ClientePJ exemploPJ = new ClientePJ ("Empresa ABC", "Rua Teste, 789", new Veiculo("ABC1234", "MarcaExemplo", "ModeloExemplo", 2010) , "77.685.935/0001-83", LocalDate.parse("09/09/2009", formatador));
                     seguradoraDemo.cadastrarCliente(exemploPF);
+                    System.out.print("\nO CPF do Cliente cadastrado agora é valido? " + exemploPF.validarCPF());
                     seguradoraDemo.cadastrarCliente(exemploPJ);
-                    System.out.print("\nCliente Pessoa Física de Teste:\n\n"+seguradoraDemo.listarClientes("PF"));
+                    System.out.print("\n\nO CNPJ do Cliente cadastrado agora é valido? " + exemploPJ.validarCNPJ());
+                    System.out.print("\n\nCliente Pessoa Física de Teste:\n\n"+seguradoraDemo.listarClientes("PF"));
                     System.out.print("\nCliente Pessoa Jurídica de Teste:\n\n"+seguradoraDemo.listarClientes("PJ"));
                     Veiculo carroDoAcidente = new Veiculo("OPS1234", "WorstCarsEver", "Bumper", 2023);
                     seguradoraDemo.getListaClientes().get(1).addVeiculo(carroDoAcidente);
@@ -509,7 +511,7 @@ public class Main {
                     System.out.println(new Cliente("Nem PF nem PJ", "Rua que não existe", carroDoAcidente).toString());
                     System.out.println(seguradoraDemo.getListaClientes().get(0).toString());
                     System.out.println(seguradoraDemo.getListaClientes().get(1).toString());
-                    System.out.println(seguradoraDemo.toString()); //TODO: toString da Seguradora
+                    System.out.println(seguradoraDemo.toString());
                     System.out.println(seguradoraDemo.getListaSinistros().get(0).toString());
                     System.out.println(seguradoraDemo.getListaClientes().get(1).getListaVeiculos().get(0).toString());
                     break;
