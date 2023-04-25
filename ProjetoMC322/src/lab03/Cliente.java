@@ -50,7 +50,7 @@ public class Cliente {
         +"\n    Veiculo(s): ";
         for(Veiculo v: listaVeiculos)
         {
-            saida = saida + "         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca() +"\n";
+            saida = saida + "\n         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca();
         }
         saida = saida + "\n";
         return saida;
