@@ -31,7 +31,7 @@ public class Cliente {
         boolean estaNaLista = false;
         for(Veiculo v: listaVeiculos)
         {
-            if(v.getPlaca() == veiculo.getPlaca())
+            if(v.getPlaca().equals(veiculo.getPlaca()))
             {
                 estaNaLista = true;
                 return !estaNaLista;

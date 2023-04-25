@@ -248,11 +248,11 @@ public class Main {
                                     for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
                                     {
                                         saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
-                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PF")
+                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente().equals("PF"))
                                         {
                                             saida = saida + " (Pessoa Física)";
                                         }
-                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PJ")
+                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente().equals("PJ"))
                                         {
                                             saida = saida + " (Pessoa Jurídica)";
                                         }
@@ -302,11 +302,11 @@ public class Main {
                                     for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
                                     {
                                         saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
-                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PF")
+                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente().equals("PF"))
                                         {
                                             saida = saida + " (Pessoa Física)";
                                         }
-                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PJ")
+                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente().equals("PJ"))
                                         {
                                             saida = saida + " (Pessoa Jurídica)";
                                         }
@@ -372,11 +372,11 @@ public class Main {
                                     for(int i = 0; i < listaSeguradoras.get(selecao.get(1)-1).getListaClientes().size(); i++)
                                     {
                                         saida = saida +"\n    " + (i+1) + " - " + listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).getNome();
-                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PF")
+                                        if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente().equals("PF"))
                                         {
                                             saida = saida + " (Pessoa Física)";
                                         }
-                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente() == "PJ")
+                                        else if(listaSeguradoras.get(selecao.get(1)-1).getListaClientes().get(i).tipoDeCliente().equals("PJ"))
                                         {
                                             saida = saida + " (Pessoa Jurídica)";
                                         }

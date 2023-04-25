@@ -51,7 +51,29 @@ public class Seguradora {
         boolean estaNaLista = false;
         for(Cliente c: listaClientes)
         {
-            if(c.equals(cliente))
+            if(cliente.tipoDeCliente().equals("PF") && c.tipoDeCliente().equals("PF"))//Caso o Cliente seja ClientePF, faz-se um typecast e compara os cpfs
+            {
+                ClientePF c1,c2;
+                c1 = (ClientePF)c;
+                c2 = (ClientePF)cliente;
+                if(c1.getCpf().equals(c2.getCpf()))
+                {
+                    estaNaLista = true;
+                    return !estaNaLista;
+                }
+            }
+            else if(cliente.tipoDeCliente().equals("PJ") && c.tipoDeCliente().equals("PJ"))//Caso o Cliente seja ClientePJ, faz-se um typecast e compara os cnpjs
+            {
+                ClientePJ c1,c2;
+                c1 = (ClientePJ)c;
+                c2 = (ClientePJ)cliente;
+                if(c1.getCnpj().equals(c2.getCnpj()))
+                {
+                    estaNaLista = true;
+                    return !estaNaLista;
+                }
+            }
+            else if(c.equals(cliente))//Caso Cliente não seja nem ClientePF nem ClientePJ (um caso que não é pra acontecer), apenas determina-se a igualdade dos objetos
             {
                 estaNaLista = true;
                 return !estaNaLista;
@@ -64,7 +86,31 @@ public class Seguradora {
         boolean estaNaLista = false;
         for(int i = 0; i < listaClientes.size(); i++)
         {
-            if(listaClientes.get(i).equals(cliente))
+            if(listaClientes.get(i).tipoDeCliente().equals("PF") && cliente.tipoDeCliente().equals("PF"))//Caso o Cliente seja ClientePF, faz-se um typecast e compara os cpfs
+            {
+                ClientePF c1,c2;
+                c1 = (ClientePF)listaClientes.get(i);
+                c2 = (ClientePF)cliente;
+                if(c1.getCpf().equals(c2.getCpf()))
+                {
+                    estaNaLista = true;
+                    listaClientes.remove(i);
+                    break;
+                }
+            }
+            if(listaClientes.get(i).tipoDeCliente().equals("PJ") && cliente.tipoDeCliente().equals("PJ"))//Caso o Cliente seja ClientePJ, faz-se um typecast e compara os cnpjs
+            {
+                ClientePJ c1,c2;
+                c1 = (ClientePJ)listaClientes.get(i);
+                c2 = (ClientePJ)cliente;
+                if(c1.getCnpj().equals(c2.getCnpj()))
+                {
+                    estaNaLista = true;
+                    listaClientes.remove(i);
+                    break;
+                }
+            }
+            else if(listaClientes.get(i).equals(cliente))//Caso Cliente não seja nem ClientePF nem ClientePJ (um caso que não é pra acontecer), apenas determina-se a igualdade dos objetos
             {
                 estaNaLista = true;
                 listaClientes.remove(i);
@@ -78,7 +124,7 @@ public class Seguradora {
         String saida = "";
         for(Cliente c: listaClientes)
         {
-            if(c.tipoDeCliente() == tipoCliente)
+            if(c.tipoDeCliente().equals(tipoCliente))
             {
                 saida = saida + c.toString();
             }
