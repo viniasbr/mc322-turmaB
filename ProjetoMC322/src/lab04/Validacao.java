@@ -1,7 +1,9 @@
 package lab04;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
 
 public class Validacao {
-
+    public static DateTimeFormatter formatadorData = DateTimeFormatter.ofPattern("dd/MM/yyyy");
     public static boolean validaCPF(String cpf)
     {
         String cpflimpo;
@@ -158,6 +160,27 @@ public class Validacao {
     {
         try {
             Integer.parseInt(numero);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+    public static boolean validaIntEntre(String numero, Intervalo intervalo)
+    {
+        try {
+            Integer.parseInt(numero);
+        } catch (Exception e) {
+            return false;
+        }
+        if(intervalo.contem(Integer.parseInt(numero)))
+            return true;
+        else
+            return false;
+    }
+    public static boolean validaData(String data)
+    {
+        try {
+            LocalDate.parse(data, formatadorData);
         } catch (Exception e) {
             return false;
         }
