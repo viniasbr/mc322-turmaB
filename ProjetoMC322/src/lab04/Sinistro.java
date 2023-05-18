@@ -1,4 +1,6 @@
 package lab04;
+import java.util.Random;
+
 
 public class Sinistro {
     private final int id;
@@ -7,6 +9,7 @@ public class Sinistro {
     private Seguradora seguradora;
     private Veiculo veiculo;
     private Cliente cliente;
+    private static Random rand = new Random();
 
     public Sinistro(String data, String endereco, Seguradora seguradora, Veiculo veiculo, Cliente cliente) {
         this.data = data;
@@ -14,12 +17,11 @@ public class Sinistro {
         this.seguradora = seguradora;
         this.veiculo = veiculo;
         this.cliente = cliente;
-        id = gerarId(); //Cria um id único que depende da data e da posição do sinistro na lista da seguradora
+        id = gerarId(); //Cria um id único e aleatório
     }
-    private int gerarId() //Codifica a data em 6 algarismos usando o resto da divisão por um primo e produz o id a partir disso e da ordemEmissao
+    private int gerarId() //Produz um inteiro aleatório de 9 algarismos
     {
-        String dataLimpa = data.replaceAll("[^0123456789]", "");
-        return (Integer.valueOf(dataLimpa)%796931)*1000 + seguradora.getListaSinistros().size(); //Assume que listaSinistros.size() < 1000. 796931 é um primo aleatório de 6 algarismos.
+        return rand.nextInt(999999999);
     }
     public int getId() {
         return id;

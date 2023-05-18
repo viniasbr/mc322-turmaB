@@ -21,4 +21,8 @@ public enum MenuOperacoes {
     public int getC1() {
         return c1;
     }
+    public void menuTextual()
+    {
+        //TODO: Menu Textual
+    }
 }

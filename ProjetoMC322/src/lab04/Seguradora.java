@@ -79,6 +79,7 @@ public class Seguradora {
                 return !estaNaLista;
             }
         }
+        cliente.setValorSeguro(cliente.calculaScore()); //Inicialmente, valorSeguro = calculaScore(), pois o cliente não tem sinistros.
         listaClientes.add(cliente);
         return !estaNaLista;
     }
@@ -131,7 +132,41 @@ public class Seguradora {
         }
         return saida;
     }
-    public boolean gerarSinistro(Sinistro sinistro){//Retorna true se foi possivel gerar o sinistro, retorna false se o sinistro já estava gerado.
+    public Cliente buscarCliente(String tipoCliente, String cpfOuCnpj)
+    {
+        if(tipoCliente.equals("PF"))
+        {
+            for(Cliente c:listaClientes)
+            {
+                if(c.tipoDeCliente().equals("PF"))
+                {
+                    ClientePF cPF = (ClientePF)c;
+                    if(cPF.getCpf().equals(cpfOuCnpj))
+                    {
+                        return cPF;
+                    }
+                }
+            }
+        }
+        else if(tipoCliente.equals("PJ"))
+        {
+            for(Cliente c:listaClientes)
+            {
+                if(c.tipoDeCliente().equals("PJ"))
+                {
+                    ClientePJ cPJ = (ClientePJ)c;
+                    if(cPJ.getCnpj().equals(cpfOuCnpj))
+                    {
+                        return cPJ;
+                    }
+                }
+            }
+        }
+        Cliente c = null;
+        return c;
+    }
+    public boolean gerarSinistro(Sinistro sinistro)//O SINISTRO GERADO DEVE SER CONSTRUIDO USANDO UM CLIENTE JA CADASTRADO!
+    {//Retorna true se foi possivel gerar o sinistro, retorna false se o sinistro já estava gerado.
         boolean estaNaLista = false;
         for(Sinistro s: listaSinistros)
         {
@@ -144,15 +179,28 @@ public class Seguradora {
         listaSinistros.add(sinistro);
         return !estaNaLista;
     }
-    public boolean visualizarSinistro(String cliente)//O enunciado especifica que esse método deve ter retorno booleano, assim, assume-se que ele confirma ou nega se o cliente possui sinistro
+    public boolean visualizarSinistro(String cliente)//O enunciado especifica que esse método deve ter retorno booleano, assim, assume-se que ele confirma ou nega se o cliente (dado CPF ou CNPJ) possui sinistro
     {
         boolean estaNaLista = false;
-        for(Cliente c: listaClientes)
-        {
-            if(c.getNome().equalsIgnoreCase(cliente))
+        for(Sinistro s: listaSinistros)
+        {   
+            if(s.getCliente().tipoDeCliente().equals("PF"))
             {
-                estaNaLista = true;
-                break;
+                ClientePF cPF = (ClientePF)s.getCliente();
+                if(cPF.getCpf().equals(cliente))
+                {
+                    estaNaLista = true;
+                    return estaNaLista;
+                }
+            }
+            else if(s.getCliente().tipoDeCliente().equals("PJ"))
+            {
+                ClientePJ cPJ = (ClientePJ)s.getCliente();
+                if(cPJ.getCnpj().equals(cliente))
+                {
+                    estaNaLista = true;
+                    return estaNaLista;
+                }
             }
         }
         return estaNaLista;
@@ -165,6 +213,55 @@ public class Seguradora {
             saida = saida + s.toString();
         }
         return saida;
+    }
+    public double calcularPrecoSeguroCliente(Cliente cliente)
+    {
+        int nSinistrosCliente = 0;
+        if(cliente.tipoDeCliente().equals("PF"))
+        {
+            ClientePF clientePF = (ClientePF)cliente;
+            for(Sinistro s : listaSinistros)
+            {
+                if(s.getCliente().tipoDeCliente().equals("PF"))
+                {
+                    ClientePF c = (ClientePF)s.getCliente();
+                    if(c.getCpf().equals(clientePF.getCpf()))
+                    {
+                        nSinistrosCliente++;
+                    }
+                }
+            }
+            return clientePF.calculaScore() * (1+nSinistrosCliente);
+        }
+        else if(cliente.tipoDeCliente().equals("PJ"))
+        {
+            ClientePJ clientePJ = (ClientePJ)cliente;
+            for(Sinistro s : listaSinistros)
+            {
+                if(s.getCliente().tipoDeCliente().equals("PJ"))
+                {
+                    ClientePJ c = (ClientePJ)s.getCliente();
+                    if(c.getCnpj().equals(clientePJ.getCnpj()))
+                    {
+                        nSinistrosCliente++;
+                    }
+                }
+            }
+            return clientePJ.calculaScore() * (1+nSinistrosCliente);
+        }
+        else
+        {
+            return 0;
+        }
+    }
+    public double calcularReceita()
+    {
+        double receita = 0;
+        for(Cliente c : listaClientes)
+        {
+            receita += c.getValorSeguro();
+        }
+        return receita;
     }
     @Override
     public String toString() {
