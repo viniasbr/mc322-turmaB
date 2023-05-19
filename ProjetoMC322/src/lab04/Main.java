@@ -1,13 +1,13 @@
 package lab04;
-/* import java.util.ArrayList;
-import java.util.Scanner; */
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDate;
+//import java.util.ArrayList;
+import java.util.Scanner;
+/* import java.time.format.DateTimeFormatter;
+import java.time.LocalDate; */
 
 public class Main {
     public static void main(String args [])
     {
-        DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        /* DateTimeFormatter formatador = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Seguradora seguradora = new Seguradora("Exemplo Seguros LTDA.", "(12)3456-7890", "contato@exemploseguros.com", "Rua do Exemplo, 123");
         Veiculo veiculo1 = new Veiculo("ABC1234", "Volkswagen", "Fusca", 1998);
         Veiculo veiculo2 = new Veiculo("ACB1234", "Volkswagen", "Fusca", 1999);
@@ -28,6 +28,11 @@ public class Main {
         String listaClientes = seguradora.listarClientes("PF") + seguradora.listarClientes("PJ");
         boolean anaTemSinistros = seguradora.visualizarSinistro("600.366.860-18");
         String listaSinistros = seguradora.listarSinistros();
-        double receita = seguradora.calcularReceita();
+        double receita = seguradora.calcularReceita(); */
+
+        //Fim das exigências da main. Mmenu textual será iniciado.
+        Scanner entrada = new Scanner(System.in);
+        MenuOperacoes.menuTextual(entrada);
+        entrada.close();
     }
 }

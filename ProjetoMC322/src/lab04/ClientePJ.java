@@ -7,10 +7,11 @@ public class ClientePJ extends Cliente{
     private LocalDate dataFundacao;
     private int qtdeFuncionarios;
     
-    public ClientePJ(String nome, String endereco, Veiculo veiculo, String cnpj, LocalDate dataFundacao) {
+    public ClientePJ(String nome, String endereco, Veiculo veiculo, String cnpj, LocalDate dataFundacao, int qtdeFuncionarios) {
         super(nome, endereco, veiculo);
         this.cnpj = cnpj;
         this.dataFundacao = dataFundacao;
+        this.qtdeFuncionarios = qtdeFuncionarios;
     }
     public String getCnpj() {
         return cnpj;
@@ -46,7 +47,6 @@ public class ClientePJ extends Cliente{
         {
             saida = saida + "\n         " + v.getMarca() +" "+ v.getModelo() + " " + v.getAnoFabricacao() + ", Placa: " + v.getPlaca();
         }
-        saida = saida + "\n    Validez do CNPJ: ";
         return saida + "\n";
     }
     @Override
