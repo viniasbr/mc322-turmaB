@@ -210,7 +210,7 @@ public class Seguradora {
         String saida = "";
         for(Sinistro s: listaSinistros)
         {
-            saida = saida + s.toString();
+            saida = saida + "\n" + s.toString();
         }
         return saida;
     }

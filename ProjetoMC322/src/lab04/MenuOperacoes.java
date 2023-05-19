@@ -167,6 +167,12 @@ public enum MenuOperacoes {
         +"\n    5 - Listar Veiculo(s) por Seguradora"
         +"\n    6 - Voltar"
         +"\n    Digite a opção desejada: ";
+        String menuExcluir = "\nMenu para Excluir:\n"
+        +"\n    1 - Excluir Cliente (e Sinistro(s))"
+        +"\n    2 - Excluir Veículo"
+        +"\n    3 - Excluir Sinistro"
+        +"\n    4 - Voltar"
+        +"\n    Digite a opção desejada: ";
         while(op != SAIR)
         {
             System.out.print(menuPrincipal);
@@ -329,7 +335,7 @@ public enum MenuOperacoes {
                                 break;
                             }
                             int indiceSeg = intTemp;
-                            System.out.print("\nCliente para o Cadastro do Veículo:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg).getListaClientes()) + listaSeguradoras.get(indiceSeg).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                            System.out.print("\nCliente para o Cadastro do Veículo:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg).getListaClientes()) +"    "+ listaSeguradoras.get(indiceSeg).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
                             entradaTemp = entrada.nextLine();
                             if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg).getListaClientes().size()+1)))
                             {
@@ -410,7 +416,7 @@ public enum MenuOperacoes {
                                     break;
                                 }
                                 int indiceSeg1 = intTemp;
-                                System.out.print("\nCliente para Mostrar Relatório:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg1).getListaClientes()) + listaSeguradoras.get(indiceSeg1).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                System.out.print("\nCliente para Mostrar Relatório:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg1).getListaClientes()) + "    "+listaSeguradoras.get(indiceSeg1).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
                                 entradaTemp = entrada.nextLine();
                                 if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg1).getListaClientes().size()+1)))
                                 {
@@ -461,13 +467,144 @@ public enum MenuOperacoes {
                                 System.out.print("\n"+listaSeguradoras.get(indiceSeg2).getListaSinistros().get(indiceSin1).toString());
                                 break;
                             case LISTAR_SINISTROS_CLI:
-                                
+                                System.out.print("\nSeguradora para Listar Sinistros por Cliente:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.size())
+                                {
+                                    break;
+                                }
+                                int indiceSeg3 = intTemp;
+                                System.out.print("\nCliente para Listar Sinistros:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg3).getListaClientes()) +"    "+ listaSeguradoras.get(indiceSeg3).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg3).getListaClientes().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg3).getListaClientes().size())
+                                {
+                                    break;
+                                }
+                                int indiceCli2 = intTemp;
+                                String menuListarSinistrosCli = "\nSinistro para Mostrar Relatório\n";
+                                for(int i = 0; i < listaSeguradoras.get(indiceSeg3).getListaSinistros().size(); i++)
+                                {
+                                    if(listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCli2).tipoDeCliente().equals("PF") && listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getCliente().tipoDeCliente().equals("PF"))
+                                    {
+                                        ClientePF clientePF = (ClientePF)listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCli2);
+                                        ClientePF c = (ClientePF) listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getCliente();
+                                        if(c.getCpf().equals(clientePF.getCpf()))
+                                        {
+                                            menuListarSinistrosCli += "\n    " + i + " - " + listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getData() + ": " + listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getCliente().getEndereco() + ", id: " + listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getId();
+                                        }
+                                    }
+                                    else if(listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCli2).tipoDeCliente().equals("PJ") && listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getCliente().tipoDeCliente().equals("PJ"))
+                                    {
+                                        ClientePJ clientePJ = (ClientePJ)listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCli2);
+                                        ClientePJ c = (ClientePJ) listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getCliente();
+                                        if(c.getCnpj().equals(clientePJ.getCnpj()))
+                                        {
+                                            menuListarSinistrosCli += "\n    " + i + " - " + listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getData() + ": " + listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getCliente().getEndereco() + ", id: " + listaSeguradoras.get(indiceSeg3).getListaSinistros().get(i).getId();
+                                        }
+                                    }
+                                }
+                                menuListarSinistrosCli += "\n    " + listaSeguradoras.get(indiceSeg3).getListaSinistros().size() + " - Voltar\n    Selecione a opção desejada: ";
+                                System.out.print(menuListarSinistrosCli);
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg3).getListaSinistros().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg3).getListaSinistros().size())
+                                {
+                                    break;
+                                }
+                                int indiceSin2 = intTemp;
+                                System.out.print("\n"+listaSeguradoras.get(indiceSeg3).getListaSinistros().get(indiceSin2).toString());
                                 break;
                             case LISTAR_VEICULOS_CLI:
-                                
+                                System.out.print("\nSeguradora para Listar Veículos por Cliente:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.size())
+                                {
+                                    break;
+                                }
+                                int indiceSeg4 = intTemp;
+                                System.out.print("\nCliente para Listar Veículos:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg4).getListaClientes()) +"    " +listaSeguradoras.get(indiceSeg4).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg4).getListaClientes().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg4).getListaClientes().size())
+                                {
+                                    break;
+                                }
+                                int indiceCli3 = intTemp;
+                                System.out.print("\nVeiculo para Mostrar Relatório:\n" + MenuOperacoes.iterarVeiculos(listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos()) +"    "+ listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().size())                        {
+                                    System.out.println();
+                                    break;
+                                }
+                                int indiceVei = intTemp;
+                                System.out.print("\n"+listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().get(indiceVei).toString());
                                 break;
                             case LISTAR_VEICULOS_SEG:
-                                
+                                System.out.print("\nSeguradora para Listar Veículos:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.size())
+                                {
+                                    break;
+                                }
+                                int indiceSeg5 = intTemp;
+                                ArrayList<Veiculo> listaVeiculosSeguradora = new ArrayList<Veiculo>();
+                                for(int i = 0; i < listaSeguradoras.get(indiceSeg5).getListaClientes().size(); i++)
+                                    for(int j = 0; j < listaSeguradoras.get(indiceSeg5).getListaClientes().get(i).getListaVeiculos().size(); j++)
+                                        listaVeiculosSeguradora.add(listaSeguradoras.get(indiceSeg5).getListaClientes().get(i).getListaVeiculos().get(j));
+                                System.out.print("\nVeiculo para Mostrar Relatório:\n" + MenuOperacoes.iterarVeiculos(listaVeiculosSeguradora) +"    "+ listaVeiculosSeguradora.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaVeiculosSeguradora.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaVeiculosSeguradora.size())                        {
+                                    System.out.println();
+                                    break;
+                                }
+                                int indiceVei2 = intTemp;
+                                System.out.print("\n"+listaVeiculosSeguradora.get(indiceVei2).toString());
                                 break;
                             case LISTAR_VOLTAR:
                                 System.out.println();
@@ -480,19 +617,160 @@ public enum MenuOperacoes {
                     }
                     break;
                 case EXCLUIR:
-                while(op != EXCLUIR_VOLTAR)
-                {
-                    //TODO: System.out.print(menuExcluir);
-                    entradaTemp = entrada.nextLine();
-                    if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(1, 5)))
+                    while(op != EXCLUIR_VOLTAR)
                     {
-                        System.out.println("\nInsira uma opção válida.\n");
-                        continue;
+                        System.out.print(menuExcluir);
+                        entradaTemp = entrada.nextLine();
+                        if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(1, 5)))
+                        {
+                            System.out.println("\nInsira uma opção válida.\n");
+                            continue;
+                        }
+                        intTemp = Integer.parseInt(entradaTemp);
+                        op = MenuOperacoes.getOperacao(3, intTemp);
+                        switch (op) {
+                            case EXCLUIR_CLIENTE:
+                            System.out.print("\nSeguradora para Excluir Cliente:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.size())
+                                {
+                                    break;
+                                }
+                                int indiceSeg1 = intTemp;
+                                System.out.print("\nCliente a ser Excluido:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg1).getListaClientes()) + "    " +listaSeguradoras.get(indiceSeg1).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg1).getListaClientes().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg1).getListaClientes().size())
+                                {
+                                    break;
+                                }
+                                int indiceCli = intTemp;
+                                for(int i = 0; i < listaSeguradoras.get(indiceSeg1).getListaSinistros().size(); i++) //Remove os sinistros do cliente excluido
+                                {
+                                    if(listaSeguradoras.get(indiceSeg1).getListaClientes().get(indiceCli).tipoDeCliente().equals("PF") && listaSeguradoras.get(indiceSeg1).getListaSinistros().get(i).getCliente().tipoDeCliente().equals("PF"))
+                                    {
+                                        ClientePF clienteSinPF = (ClientePF)listaSeguradoras.get(indiceSeg1).getListaSinistros().get(i).getCliente();
+                                        ClientePF clientePF = (ClientePF)listaSeguradoras.get(indiceSeg1).getListaClientes().get(indiceCli);
+                                        if(clientePF.getCpf().equals(clienteSinPF.getCpf()))
+                                        {
+                                            listaSeguradoras.get(indiceSeg1).getListaSinistros().remove(i);
+                                        }
+                                    }
+                                    else if(listaSeguradoras.get(indiceSeg1).getListaClientes().get(indiceCli).tipoDeCliente().equals("PJ") && listaSeguradoras.get(indiceSeg1).getListaSinistros().get(i).getCliente().tipoDeCliente().equals("PJ"))
+                                    {
+                                        ClientePJ clienteSinPJ = (ClientePJ)listaSeguradoras.get(indiceSeg1).getListaSinistros().get(i).getCliente();
+                                        ClientePJ clientePJ = (ClientePJ)listaSeguradoras.get(indiceSeg1).getListaClientes().get(indiceCli);
+                                        if(clientePJ.getCnpj().equals(clienteSinPJ.getCnpj()))
+                                        {
+                                            listaSeguradoras.get(indiceSeg1).getListaSinistros().remove(i);
+                                        }
+                                    }
+                                }
+                                listaSeguradoras.get(indiceSeg1).getListaClientes().remove(indiceCli);
+                                System.out.print("\nCliente e seus sinistros foram excluidos com sucesso\n");
+                                break;
+                            case EXCLUIR_VEICULO:
+                            System.out.print("\nSeguradora para Listar Excluir Veículo:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.size())
+                                {
+                                    break;
+                                }
+                                int indiceSeg4 = intTemp;
+                                System.out.print("\nCliente à ter Veículo Excluido:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg4).getListaClientes()) + "    "+listaSeguradoras.get(indiceSeg4).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg4).getListaClientes().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg4).getListaClientes().size())
+                                {
+                                    break;
+                                }
+                                int indiceCli3 = intTemp;
+                                System.out.print("\nVeiculo para ser Excluido:\n" + MenuOperacoes.iterarVeiculos(listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos()) +"    "+ listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().size())                        {
+                                    System.out.println();
+                                    break;
+                                }
+                                int indiceVei = intTemp;
+                                listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).getListaVeiculos().remove(indiceVei);
+                                listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3).setValorSeguro(listaSeguradoras.get(indiceSeg4).calcularPrecoSeguroCliente(listaSeguradoras.get(indiceSeg4).getListaClientes().get(indiceCli3)));
+                                System.out.print("\nVeiculo excluido com sucesso.\n");
+                                break;
+                            case EXCLUIR_SINISTRO:
+                                System.out.print("\nSeguradora para Excluir Sinistro:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.size())
+                                {
+                                    break;
+                                }
+                                int indiceSeg2 = intTemp;
+                                String menuListarSinistrosSeg = "\nSinistro à Ser Excluido\n";
+                                for(int i = 0; i < listaSeguradoras.get(indiceSeg2).getListaSinistros().size(); i++)
+                                {
+                                    menuListarSinistrosSeg += "\n    " + i + " - " + listaSeguradoras.get(indiceSeg2).getListaSinistros().get(i).getData() + ": " + listaSeguradoras.get(indiceSeg2).getListaSinistros().get(i).getCliente().getNome() + ", id: " + listaSeguradoras.get(indiceSeg2).getListaSinistros().get(i).getId();
+                                }
+                                menuListarSinistrosSeg += "\n    " + listaSeguradoras.get(indiceSeg2).getListaSinistros().size() + " - Voltar\n    Selecione a opção desejada: ";
+                                System.out.print(menuListarSinistrosSeg);
+                                entradaTemp = entrada.nextLine();
+                                if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg2).getListaSinistros().size()+1)))
+                                {
+                                    System.out.println("\nInsira uma opção válida.\n");
+                                    break;
+                                }
+                                intTemp = Integer.parseInt(entradaTemp);
+                                if(intTemp == listaSeguradoras.get(indiceSeg2).getListaSinistros().size())
+                                {
+                                    break;
+                                }
+                                int indiceSin1 = intTemp;
+                                Cliente cliente = listaSeguradoras.get(indiceSeg2).getListaSinistros().get(indiceSin1).getCliente();
+                                listaSeguradoras.get(indiceSeg2).getListaSinistros().remove(indiceSin1);
+                                cliente.setValorSeguro(listaSeguradoras.get(indiceSeg2).calcularPrecoSeguroCliente(cliente));
+                                System.out.print("\nSinistro excluido com sucesso.\n");
+                                break;
+                            case EXCLUIR_VOLTAR:
+                                System.out.println();
+                                break;
+                            default:
+                                op = EXCLUIR_VOLTAR;
+                                System.out.print("\nERRO!\n");
+                                break;
+                        }
                     }
-                    intTemp = Integer.parseInt(entradaTemp);
-                    op = MenuOperacoes.getOperacao(3, intTemp);
-                    //TODO: Switch Case Excluir
-                }
                     break;
                 case GERAR_SINISTRO:
                     System.out.print("\nSeguradora para Gerar o Sinistro:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
@@ -509,7 +787,7 @@ public enum MenuOperacoes {
                         break;
                     }
                     int indiceSeg = intTemp;
-                    System.out.print("\nCliente que Sofreu o Acidente:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg).getListaClientes()) + listaSeguradoras.get(indiceSeg).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                    System.out.print("\nCliente que Sofreu o Acidente:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg).getListaClientes()) + "    "+listaSeguradoras.get(indiceSeg).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
                     entradaTemp = entrada.nextLine();
                     if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg).getListaClientes().size()+1)))
                     {
@@ -564,7 +842,7 @@ public enum MenuOperacoes {
                         break;
                     }
                     int indiceSeg3 = intTemp;
-                    System.out.print("\nCliente Remetente da Transferência:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg3).getListaClientes()) + listaSeguradoras.get(indiceSeg3).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                    System.out.print("\nCliente Remetente da Transferência:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg3).getListaClientes()) +"    " + listaSeguradoras.get(indiceSeg3).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
                     entradaTemp = entrada.nextLine();
                     if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg3).getListaClientes().size()+1)))
                     {
@@ -577,7 +855,7 @@ public enum MenuOperacoes {
                         break;
                     }
                     int indiceCliRemetente = intTemp;
-                    System.out.print("\nCliente Destinatário da Transferência:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg3).getListaClientes()) + listaSeguradoras.get(indiceSeg3).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                    System.out.print("\nCliente Destinatário da Transferência:\n" + MenuOperacoes.iterarClientes(listaSeguradoras.get(indiceSeg3).getListaClientes()) + "    "+listaSeguradoras.get(indiceSeg3).getListaClientes().size() + " - Voltar" + "\n    Selecione a opção desejada: ");
                     entradaTemp = entrada.nextLine();
                     if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.get(indiceSeg3).getListaClientes().size()+1)))
                     {
@@ -603,6 +881,23 @@ public enum MenuOperacoes {
                     listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCliDestinatário).setValorSeguro(listaSeguradoras.get(indiceSeg3).calcularPrecoSeguroCliente(listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCliDestinatário)));
                     listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCliRemetente).setValorSeguro(listaSeguradoras.get(indiceSeg3).calcularPrecoSeguroCliente(listaSeguradoras.get(indiceSeg3).getListaClientes().get(indiceCliRemetente)));
                     System.out.print("\nTransferência realizada com sucesso.\n");
+                    break;
+                case CALCULAR_RECEITA:
+                    System.out.print("\nSeguradora para Calcular a Receita:\n" + MenuOperacoes.iterarSeguradoras(listaSeguradoras) + "    " + listaSeguradoras.size() + " - Voltar" + "\n    Selecione a opção desejada: ");
+                    entradaTemp = entrada.nextLine();
+                    if(!Validacao.validaIntEntre(entradaTemp, Intervalo.definidoPor(0, listaSeguradoras.size()+1)))
+                    {
+                        System.out.println("\nInsira uma opção válida.\n");
+                        break;
+                    }
+                    intTemp = Integer.parseInt(entradaTemp);
+                    if(intTemp == listaSeguradoras.size())
+                    {
+                        System.out.println();
+                        break;
+                    }
+                    String saida = "\nReceita da Seguradora "+listaSeguradoras.get(intTemp).getNome()+ ": R$" +String.format("%.2f", listaSeguradoras.get(intTemp).calcularReceita()+"\n");
+                    System.out.println(saida);
                     break;
                 case SAIR:
                     break; //op = SAIR sai do loop principal

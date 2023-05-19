@@ -21,7 +21,7 @@ public class Sinistro {
     }
     private int gerarId() //Produz um inteiro aleatório de 9 algarismos
     {
-        return rand.nextInt(999999999);
+        return rand.nextInt(899999999)+100000000;
     }
     public int getId() {
         return id;
